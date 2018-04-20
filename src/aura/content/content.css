@@ -1,0 +1,17 @@
+.content.THIS {
+    margin-left: 10px;
+    font-size: 16px;
+    padding: 20px 40px 20px 40px;
+    min-height: 100px;
+    background: rgb(250, 250, 249);
+    color: rgb(22, 50, 92);
+}
+.content2.THIS {
+    font-size: 20px;
+    color: rgb(0, 95, 178);
+}
+
+.date.THIS {
+    color: black;
+    font-size: 10px;
+}

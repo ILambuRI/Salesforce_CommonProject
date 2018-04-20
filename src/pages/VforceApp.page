@@ -1,0 +1,83 @@
+<apex:page lightningStylesheets="true" docType="html-5.0" controller="VforceAppController">
+
+    <head>
+        <apex:slds /> 
+    </head>
+
+    <body class="slds-scope" >
+        <div>
+            <apex:form id="main">
+                <apex:pageBlock title="Accounts List" id="accounts_list">
+                <apex:pageMessages id="zzz" />
+                <apex:pageBlockButtons rendered="{! deleteAccess }" >
+                    <apex:commandButton value="Delete" action="{! deleteContacts }" onclick="return confirm('Are you sure?');" />
+                </apex:pageBlockButtons>
+                    <apex:pageBlockTable value="{! myAccountsList}" var="account">
+                        <apex:column headerValue="Accounts" value="{! account.name }"/>
+                        <apex:column headerValue="Contacts">
+                                <apex:commandlink action="{! renderPopUp }" rendered="{! createAccess }" > 
+                                    <apex:param name="AddContact" value="{! account.id }" assignTo="{! accountId }"/> 
+                                    <apex:commandbutton value="Add Contact" /> 
+                                </apex:commandlink>
+                            <apex:pageBlockTable value="{! account.contacts}" var="contact">
+                                <apex:column headerValue="Select" rendered="{! deleteAccess }">
+                                    <apex:inputCheckbox value="{! contact.selected }">
+                                        <apex:actionSupport event="onchange" action="{! addToDelete}"  rerender="false">
+                                            <apex:param name="SelectedToDelete" value="{! contact.id }"/>
+                                        </apex:actionSupport>
+                                    </apex:inputCheckbox>
+                                </apex:column>
+                                <apex:column headerValue="Name" value="{!contact.name}" />
+                                <apex:column headerValue="Email" value="{!contact.email}" />
+
+                                <apex:column headerValue="Action" rendered="{! editAccess }" >
+                                    <apex:commandlink action="{! editContact }"> 
+                                        <apex:param name="EditContact" value="{! contact.id }" assignTo="{! contactId }"/> 
+                                        <apex:commandbutton value="Edit Contact" /> 
+                                    </apex:commandlink> 
+                                </apex:column>
+                            </apex:pageBlockTable>
+                        </apex:column>
+                    </apex:pageBlockTable>
+                </apex:pageBlock>
+            </apex:form>
+        </div>
+
+    <!-- Modal window Add / Edit ? Contact -->
+        
+        <apex:form rendered="{! myRender }" >
+            <apex:pageBlock >
+            <apex:pageMessages id="showmsg"></apex:pageMessages>
+                <div class="demo-only" >
+                    <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                        <div class="slds-modal__container">
+                            <header class="slds-modal__header">
+                                <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Contact Form</h2>
+                            </header>
+                            <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                                <div class="slds-form-element">
+                                <label class="slds-form-element__label" for="text-input-id-1">Contact Name</label>
+                                <div class="slds-form-element__control">
+                                    <apex:inputText id="conName" value="{! inputName }"/>
+                                </div>
+                                <label class="slds-form-element__label" for="text-input-id-1">Contact Email</label>
+                                <div class="slds-form-element__control">
+                                    <apex:inputText id="conEmail" value="{! inputEmail }"/>
+                                </div>
+                                </div>
+                             
+                            </div>
+                            <footer class="slds-modal__footer">
+                                <apex:commandButton action="{! cancel }" value="Cancel" />
+                                <apex:commandButton value="Save" action="{!saveContact}" />
+                            </footer>
+                        </div>
+                    </section>
+                    <div class="slds-backdrop slds-backdrop_open"></div>
+                </div>
+            </apex:pageBlock>
+        </apex:form>
+    </body>
+
+
+</apex:page>

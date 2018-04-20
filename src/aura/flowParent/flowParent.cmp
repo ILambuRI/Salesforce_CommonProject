@@ -1,0 +1,5 @@
+<aura:component implements="flexipage:availableForAllPageTypes">
+    
+    <c:flowFooter availableActions="{!v.availableActions}" navigateFlowEvent="{!c.handleNavigate}" />
+
+</aura:component>

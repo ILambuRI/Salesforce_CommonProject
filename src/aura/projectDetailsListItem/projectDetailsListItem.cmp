@@ -1,0 +1,80 @@
+<aura:component >
+    <aura:attribute name='employeeSkill' type='EmployeeSkill__c' />
+    <aura:attribute name='showEditForm' type='Boolean' default='false' />
+    <aura:attribute name='showSpinner' type='Boolean' default='false' />
+
+    <!-- EVENTS ******************************************************************************************* -->
+    <!-- MARKUP ******************************************************************************************* -->
+    <div class="slds-grid slds-size_1-of-1 slds-grid_align-center slds-m-top_xx-small">
+        <lightning:card class="slds-size_1-of-1">
+            <aura:set attribute="title">
+                <lightning:icon iconName="utility:user" size="small"/>
+                <span class='slds-m-left_xx-small'>
+                	{! v.employeeSkill.Employee__r.First_Name__c + ' ' + v.employeeSkill.Employee__r.Last_Name__c }
+            	</span>
+            </aura:set>
+
+            <aura:set attribute="body">
+                <aura:if isTrue="{! !v.showEditForm }">
+                    <div class="slds-grid slds-grid_align-center">
+                        <div class="slds-grid slds-size_10-of-12 slds-wrap slds-box">
+                            <div class="slds-grid slds-size_1-of-1 slds-border_bottom">
+                                <div class="slds-grid slds-size_11-of-12">
+                                	<p><strong>Position: </strong> {! v.employeeSkill.Position__c }</p>
+                                </div>
+                                <div class="slds-size_1-of-12">
+                                    <div class="slds-float_right">
+                                        <lightning:buttonIcon onclick="{!c.onclickEditButton}"
+                                                              iconName="utility:edit"
+                                                              variant="bare"
+                                                              alternativeText="Edit" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slds-grid slds-size_1-of-1 slds-border_bottom slds-m-top_xx-small">
+                                <div class="slds-grid slds-size_11-of-12">
+                                	<p><strong>Assigned: </strong> {! v.employeeSkill.Assigned_Time__c }</p>
+                                </div>
+                                <div class="slds-size_1-of-12">
+                                    <div class="slds-float_right">
+                                        <lightning:buttonIcon onclick="{!c.onclickEditButton}"
+                                                              iconName="utility:edit"
+                                                              variant="bare"
+                                                              alternativeText="Edit" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </aura:if>
+
+                <aura:if isTrue="{!v.showEditForm}">
+                    <lightning:layoutItem aura:id="place_for_edit_form" class="slds-grid slds-grid_align-center">
+                        <!-- <lightning:recordEditForm
+                            class="slds-grid slds-col"
+                            onsubmit="{!c.handleEditFormSubmit}"
+                            onsuccess="{!c.handleEditFormSuccess}"
+                            onerror="{!c.handleEditFormError}"
+                            recordId="{! v.employeeSkill.Id }"
+                            objectApiName="EmployeeSkill__c">
+
+                            <lightning:messages />
+
+                            <lightning:inputField fieldName="Position__c" />
+                            <lightning:inputField fieldName="Assigned_Time__c" />
+
+                            <div class="slds-m-top_medium">
+                                <lightning:button variant="brand" type="submit" name="save" label="Save" />
+                                <lightning:button variant="neutral" label="Cencel" onclick="{!c.onclickCencelEditForm}" />
+                            </div>
+                        </lightning:recordEditForm> -->
+                    </lightning:layoutItem>
+                </aura:if>
+
+                <aura:if isTrue="{!v.showSpinner}">
+                        <lightning:spinner alternativeText="Loading"/>
+                </aura:if>
+            </aura:set>
+        </lightning:card>
+    </div>
+</aura:component>

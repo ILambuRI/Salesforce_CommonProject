@@ -1,0 +1,33 @@
+<aura:component controller="L_EmployeeController">
+
+    <aura:attribute name="positionPick" type="List" />
+    <aura:attribute name="wEmployee" type="Object" />
+    <aura:attribute name="projectId" type="String" />
+
+    <aura:attribute name="hour" type="Integer" />
+    <aura:attribute name="selPosValue" type="String" />
+
+    <aura:registerEvent name="UpdateEmployeesEvent" type="c:UpdateEmployeesEvent"/>
+    <form class="slds-form ">
+
+        <div class="slds-form-element">
+            <lightning:input type="decimal" label="Hour" name="number" required="true" value="{!v.hour}" />
+        </div>
+
+        <div class="slds-form-element">
+            <lightning:select name="select1" label="Position" value="{!v.selPosValue}" required="true">
+                <option value="">Select Pleace</option>
+                <aura:iteration items="{!v.positionPick}" var="position" >
+                    <option value="{!position}">{!position}</option>
+                </aura:iteration>
+            </lightning:select>
+        </div>
+
+        <div class="slds-form-element slds-m-top_x-small slds-float_right">
+            <button class="slds-button slds-button_brand" type="button" onclick="{!c.addEmployee}">Add</button>
+        </div>
+        
+    </form>
+
+
+</aura:component>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>EmployeeSkill</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>EmployeeSkills</value>
+    </caseValues>
+    <fields>
+        <label><!-- Assigned Time --></label>
+        <name>Assigned_Time__c</name>
+    </fields>
+    <fields>
+        <label><!-- Employee --></label>
+        <name>Employee__c</name>
+        <relationshipLabel><!-- Employee Skills --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Position --></label>
+        <name>Position__c</name>
+        <picklistValues>
+            <masterLabel>Developer</masterLabel>
+            <translation><!-- Developer --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Project Manager</masterLabel>
+            <translation><!-- Project Manager --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Project Owner</masterLabel>
+            <translation><!-- Project Owner --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Team Lead</masterLabel>
+            <translation><!-- Team Lead --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Tester</masterLabel>
+            <translation><!-- Tester --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Project --></label>
+        <name>Project__c</name>
+        <relationshipLabel><!-- Employee Skills r --></relationshipLabel>
+    </fields>
+    <startsWith>Vowel</startsWith>
+    <validationRules>
+        <errorMessage><!-- Error - must be 1-8 h. --></errorMessage>
+        <name>Assigned_Time</name>
+    </validationRules>
+</CustomObjectTranslation>

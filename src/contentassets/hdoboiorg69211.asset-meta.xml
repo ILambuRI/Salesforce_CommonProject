@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentAsset xmlns="http://soap.sforce.com/2006/04/metadata">
+    <language>en_US</language>
+    <masterLabel>hdoboiorg69211</masterLabel>
+    <relationships>
+        <organization>
+            <access>VIEWER</access>
+        </organization>
+    </relationships>
+    <versions>
+        <version>
+            <number>1</number>
+            <pathOnClient>hdoboi.org-69211.jpg</pathOnClient>
+        </version>
+    </versions>
+</ContentAsset>

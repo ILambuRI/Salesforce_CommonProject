@@ -1,0 +1,103 @@
+<aura:component >
+    <aura:attribute name="user" type="String" default="{Vasia - default value}" />
+    <aura:attribute name="title" type="String" default="Title default" />
+
+    <aura:attribute name="number1" type="integer" default="1" />
+    <aura:attribute name="number2" type="integer" default="2" />
+
+    <!-- <c:flowComp /> -->
+    <!-- <c:quickAdd /> -->
+
+    <diV class="slds-page-header slds-page-header_object-home">
+        <lightning:layout >
+            <lightning:layoutItem >
+                <p class="slds-text-title_caps slds-line-height_reset">
+                    Test yourself!
+                    <br/>
+                    <strong>Get Start - {!v.user}!</strong>
+                </p>
+            </lightning:layoutItem>
+        </lightning:layout>
+    </diV>
+
+    <div class="slds-text-align_center slds-size_medium">
+        <lightning:card variant="base" title="Test button" iconName="standard:custom14">
+            <aura:set attribute="title">
+                {!v.title}
+            </aura:set>
+            <aura:set attribute="actions">
+                <lightning:button name="btn1" label="test" onclick="{!c.changeLable}" />
+            </aura:set>
+            <aura:set attribute="footer">
+                footer
+            </aura:set>
+        </lightning:card>
+    </div>
+
+    <div>
+
+        <lightning:tabset variant="scoped">
+            <lightning:tab onactive="{!c.tabClicked}" label="Tab 1" id="tab1">
+                content 1 content 1 content 1
+            </lightning:tab>
+            <lightning:tab onactive="{!c.tabClicked}" label="Tab 2" id="tab2">
+                222content 2 content 2 content 2
+            </lightning:tab>
+            <lightning:tab onactive="{!c.tabClicked}" label="Tab 3" id="tab3">
+                3333content 3 content 3 content 3
+            </lightning:tab>
+        </lightning:tabset>
+    </div>
+
+    <div class="bg_white">
+        <lightning:layout horizontalAlign="space" class="slds-grid_reverse">
+            <lightning:layoutItem padding="around-small">
+                <!-- more markup here -->
+                drft///fffbbbgvg
+            </lightning:layoutItem>
+            <!-- more lightning:layoutItem components here -->
+        </lightning:layout>
+    </div>
+
+    <div>
+        <ul class="slds-has-dividers_around-space">
+            <li class="slds-item">
+                <lightning:tile label="Anypoint Connectors" href="/path/to/somewhere" class="slds-tile_board">
+                    <p class="slds-text-heading_medium">$500,000</p>
+                    <p class="slds-truncate" title="Company One">
+                        <a href="#">Company One</a>
+                    </p>
+                    <p class="slds-truncate">Closing 9/30/2015</p>
+                </lightning:tile>
+            </li>
+        </ul>
+    </div>
+
+    <div>
+
+        <ui:inputNumber label="Number 1" value="{!v.number1}" updateOn="keyup" />
+        <ui:inputNumber label="Number 2" value="{!v.number2}" updateOn="keyup" />
+
+        <!-- Adds the numbers and returns the sum -->
+        <p>SUM:
+            <ui:outputNumber value="{!(v.number1 * 1) + (v.number2 * 1)}" />
+        </p>
+
+        <ui:message title="Error" severity="error" closable="true">
+            This is an error message.
+        </ui:message>
+    </div>
+
+    <div>
+        <ui:menu >
+            <ui:menuTriggerLink aura:id="trigger" label="Opportunity Status" />
+            <ui:menuList class="actionMenu" aura:id="actionMenu">
+                <ui:actionMenuItem aura:id="item2" label="Open" click="{!c.updateTriggerLabel}" />
+                <ui:actionMenuItem aura:id="item3" label="Closed" click="{!c.updateTriggerLabel}" />
+                <ui:actionMenuItem aura:id="item4" label="Closed Won" click="{!c.updateTriggerLabel}" />
+            </ui:menuList>
+        </ui:menu>
+
+    </div>
+
+</aura:component>

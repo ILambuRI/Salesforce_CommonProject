@@ -1,0 +1,5 @@
+<aura:event type="COMPONENT">
+    <aura:attribute name="topicId" type="String" />
+    <aura:attribute name="like" type="Boolean" />
+    
+</aura:event>

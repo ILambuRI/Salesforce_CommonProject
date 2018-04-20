@@ -1,0 +1,46 @@
+<aura:component controller="LookupSObjectController" implements="force:appHostable,flexipage:availableForAllPageTypes">
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <!-- Lookup component -->
+    <!-- <c:testComponent label="Account" pluralLabel="Accounts" sObjectAPIName="project__c"  /> -->
+
+
+
+    <!-- Required Scripts/Styles -->
+    <!-- Salesforce Lightning Design System : https://www.lightningdesignsystem.com/ -->
+    
+    
+    <!-- Attributes -->
+    <aura:attribute name="sObjectAPIName" type="String" description="The API name of the SObject to search" />
+    <aura:attribute name="accountForSelect" type="sObject[]"/>
+    <!-- <aura:attribute name="label" type="String"  description="The label to assign to the lookup, eg: Account" /> -->
+    <!-- <aura:attribute name="pluralLabel" type="String" description="The plural label to assign to the lookup, eg: Accounts" /> -->
+
+    <!-- <aura:attribute name="listIconClass" type="String" default="slds-icon-custom-11" description="The SLDS class to use for the icon." /> -->
+    <aura:attribute name="searchString" type="String" description="The search string to find." />
+    <aura:attribute name="matches" type="map[]" description="The resulting matches returned by the Apex controller." />
+
+    <!-- Events -->
+    <!-- <aura:registerEvent name="updateLookupIdEvent" type="c:UpdateLookupId"/>    
+    <aura:registerEvent name="clearLookupIdEvent" type="c:ClearLookupId"/>     -->
+    <lightning:select name="mySelect" label="Select a color:" aura:id="mySelect" value="{!v.selectedValue}">
+        <aura:iteration items="{!v.accountForSelect}" var="item">
+            <option text="{!item.label}" value="{!item.id}"/>
+         </aura:iteration>
+    </lightning:select>
+    <!-- Lookup Markup : See https://www.lightningdesignsystem.com/components/lookups -->
+    <div class="slds"> 
+    <div aura:id="lookup-div" class="slds-lookup" data-select="single" data-scope="single" data-typeahead="true">
+        <!-- This is the Input form markup -->
+        <div class="slds-form-element">
+            <label class="slds-form-element__label" for="lookup">{!v.label}</label>
+            <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon--right">
+                    <ui:inputText aura:id="lookup" value="{!v.searchString}" class="slds-input" updateOn="keyup" keyup="{!c.search}" />
+                </div>
+            </div>
+        <aura:iteration items="{!v.matches}" var="item">
+            fdsfsdfsd
+        </aura:iteration>
+        </div>
+    </div>
+</aura:component>
