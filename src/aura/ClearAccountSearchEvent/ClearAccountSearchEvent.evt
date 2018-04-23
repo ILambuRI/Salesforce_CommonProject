@@ -1,3 +1,0 @@
-<aura:event type="COMPONENT" access="global">
-    <aura:attribute name="clearStatus" type="Boolean"  access="global"/>
-</aura:event>

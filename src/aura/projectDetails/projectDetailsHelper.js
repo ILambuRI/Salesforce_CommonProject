@@ -24,6 +24,7 @@
 				cmp.set("v.allEmployeeSkillsForProjectList", response.getReturnValue());
                 cmp.set("v.filteredEmployeeSkillsForProjectList", response.getReturnValue());
                 console.log(response.getReturnValue());
+                console.log(JSON.parse(JSON.stringify(response.getReturnValue())));
                 
             }
             else {
@@ -70,7 +71,7 @@
 		}
 		else {
 			var filteredEmployeeSkillsForProjectList = allEmployeeSkillsForProjectList.filter(function(employeeSkill) {
-				if(employeeSkill.Position__c == selectedPosition) {
+				if(employeeSkill.position == selectedPosition) {
 					return true;
 				}
             });

@@ -1,3 +1,0 @@
-<aura:event type="COMPONENT" description="">
-    <aura:attribute name="position" type="String"/>
-</aura:event>

@@ -18,8 +18,8 @@
 		var positionFieldValue = response.fields.Position__c.value;
 		
 		var employeeSkill = cmp.get('v.employeeSkill');
-		employeeSkill.Assigned_Time__c = assignedTimeFieldValue;
-		employeeSkill.Position__c = positionFieldValue;
+		employeeSkill.assignedTime = assignedTimeFieldValue;
+		employeeSkill.position = positionFieldValue;
 		cmp.set('v.employeeSkill', employeeSkill);
 	},
 
@@ -62,7 +62,7 @@
 					'aura:id' : "edit_form",
 					'class' : "slds-grid slds-col",
 					'objectApiName' : "EmployeeSkill__c",
-					'recordId' : cmp.get("v.employeeSkill.Id"),
+					'recordId' : cmp.get("v.employeeSkill.ID"),
 					'onsubmit' : cmp.getReference("c.handleEditFormSubmit"),
 					'onsuccess' : cmp.getReference("c.handleEditFormSuccess"),
 					'onerror' : cmp.getReference("c.handleEditFormError"),

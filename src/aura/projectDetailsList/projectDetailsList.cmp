@@ -1,5 +1,5 @@
 <aura:component >
-	<aura:attribute name='employeeSkillsList' type='EmployeeSkill__c[]' default='[]' />
+	<aura:attribute name='employeeSkillsList' type='List' default='[]' />
 
     <!-- EVENTS ******************************************************************************************* -->
     <!-- MARKUP ******************************************************************************************* -->

@@ -35,7 +35,7 @@ public with sharing class L_ProjectDetailsController {
 
     @AuraEnabled
     /* Return all objs 'Words__c' where Subject__c == subject */
-    public static List<EmployeeSkill__c> getEmployeeSkillsByProjectID(String ID) {
+    public static List<EmployeeSkillWrapper> getEmployeeSkillsByProjectID(String ID) {
         EmployeeSkill__c[]  employeeSkillList = new EmployeeSkill__c[]{};
         
         try {
@@ -79,19 +79,40 @@ public with sharing class L_ProjectDetailsController {
             GROUP BY Employee__r.ID
         ];
 
-        System.debug(sumEmployeeAssignedTimeList);
+        // System.debug(sumEmployeeAssignedTimeList);
 
-        Map<ID,Integer> employeeIDAndAvailabilityMap = new Map<ID,Integer>();
+        Map<ID,Integer> employeeIDAndSumAssignedTimeMap = new Map<ID,Integer>();
 
         for (AggregateResult result : sumEmployeeAssignedTimeList) {
-            employeeIDAndAvailabilityMap.put((ID)result.get('Id'), Math.round((Decimal)result.get('sum')));
+            employeeIDAndSumAssignedTimeMap.put((ID)result.get('Id'), Math.round((Decimal)result.get('sum')));
         }
 
-        
+        EmployeeSkillWrapper[] employeeSkillWrapperList = new EmployeeSkillWrapper[]{};
 
-        System.debug(employeeIDAndAvailabilityMap);
+        for (EmployeeSkill__c employeeSkill : employeeSkillList) {
+            Integer employeeAvailability = Math.round((Decimal)employeeSkill.Employee__r.Availability__c);
+            Integer employeeSumAssignedTime = employeeIDAndSumAssignedTimeMap.get(employeeSkill.Employee__c);
 
-        return employeeSkillList;
+            Integer freeHours = employeeAvailability - employeeSumAssignedTime;
+
+            EmployeeSkillWrapper employeeSkillWrapper = new EmployeeSkillWrapper();
+            employeeSkillWrapper.ID = employeeSkill.ID;
+            employeeSkillWrapper.employeeID = employeeSkill.Employee__c;
+            employeeSkillWrapper.projectID = employeeSkill.Project__c;
+            employeeSkillWrapper.position = employeeSkill.Position__c;
+            employeeSkillWrapper.assignedTime = Math.round((Decimal)employeeSkill.Assigned_Time__c);
+            employeeSkillWrapper.employeeAvailability = Math.round((Decimal)employeeSkill.Employee__r.Availability__c);
+            employeeSkillWrapper.employeeFreeHours = freeHours;
+            employeeSkillWrapper.employeeSumAssignedTime = employeeSumAssignedTime;
+            employeeSkillWrapper.employeeFirstName = employeeSkill.Employee__r.First_Name__c;
+            employeeSkillWrapper.employeeLastName = employeeSkill.Employee__r.Last_Name__c;
+
+            employeeSkillWrapperList.add(employeeSkillWrapper);
+        }
+
+        System.debug(employeeSkillWrapperList);
+
+        return employeeSkillWrapperList;
     }
 
     @AuraEnabled
@@ -105,15 +126,26 @@ public with sharing class L_ProjectDetailsController {
         return L_SchemaService.getPicklistValues(objectName, fieldName);
     }
 
-    // public class EmployeeSkillWrapper {
-    //     public ID Id {get; set;}
-    //     public ID Employee__c {get; set;}
-    //     public ID Project__c {get; set;}
-    //     public String Position__c {get; set;}
-    //     public Integer Assigned_Time__c {get; set;}
-    //     public Integer Employee_Availability {get; set;}
-    //     public String Employee_FreeHours {get; set;}
-    //     public String Employee_FirstName {get; set;}
-    //     public String Employee_LastName {get; set;}
-    // }
+    public class EmployeeSkillWrapper {
+        @AuraEnabled
+        public ID ID {get; set;}
+        @AuraEnabled
+        public ID employeeID {get; set;}
+        @AuraEnabled
+        public ID projectID {get; set;}
+        @AuraEnabled
+        public String position {get; set;}
+        @AuraEnabled
+        public Integer assignedTime {get; set;}
+        @AuraEnabled
+        public Integer employeeAvailability {get; set;}
+        @AuraEnabled
+        public Integer employeeFreeHours {get; set;}
+        @AuraEnabled
+        public Integer employeeSumAssignedTime {get; set;}
+        @AuraEnabled
+        public String employeeFirstName {get; set;}
+        @AuraEnabled
+        public String employeeLastName {get; set;}
+    }
 }

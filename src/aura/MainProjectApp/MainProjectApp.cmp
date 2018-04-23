@@ -1,5 +1,0 @@
-<aura:component implements="force:appHostable">
-
-    <c:Projects /> 
-
-</aura:component>

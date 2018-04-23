@@ -1,8 +1,0 @@
-<aura:component implements="force:appHostable,lightning:availableForFlowScreens">
-
-    <!-- <aura:handler name="init" value="{!this}" action="{!c.init}" /> -->
-    <c:learnHeader />
-    <!-- <c:flowParent /> -->
-    
-    
-</aura:component>
